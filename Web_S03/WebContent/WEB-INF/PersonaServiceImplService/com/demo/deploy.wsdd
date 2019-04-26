@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PersonaServiceImplService WSDL service -->
+
+  <service name="PersonaServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://demo.com"/>
+      <parameter name="wsdlServiceElement" value="PersonaServiceImplService"/>
+      <parameter name="schemaQualified" value="http://demo.com"/>
+      <parameter name="wsdlServicePort" value="PersonaServiceImpl"/>
+      <parameter name="className" value="com.demo.PersonaServiceImpl"/>
+      <parameter name="wsdlPortType" value="PersonaServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://demo.com" xmlns:retNS="http://demo.com" xmlns:rtns="http://demo.com" name="buscarId" qname="operNS:buscarId" returnQName="retNS:buscarIdReturn" returnType="rtns:Persona" soapAction="">
+        <parameter xmlns:pns="http://demo.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="buscarId"/>
+
+      <typeMapping xmlns:ns="http://demo.com" qname="ns:Persona" type="java:com.demo.Persona" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
